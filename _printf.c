@@ -1,37 +1,85 @@
-#include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
+#include <stddef.h>
+
 /**
- * The printf function: prints anything
- * 
+ * cov_fun - select function for conversion char
+ * @c: char to check
+ * Return: pointer to function
  */
+
+int (*cov_fun(const char c))(va_list)
+{
+	int i = 0;
+
+	f_list vaList[] = {
+		{"c", print_char},
+		{"s", print_str},
+		{"i", print_nbr},
+		{"d", print_nbr},
+		{"b", print_binary},
+		{"o", print_octal},
+		{"x", print_hexa_lower},
+		{"X", print_hexa_upper},
+		{"u", print_unsigned},
+		{"S", print_str_unprintable},
+		{"r", print_str_reverse},
+		{"p", print_ptr},
+		{"R", print_rot13},
+		{"%", print_percent}};
+	while (i < 14)
+	{
+		if (c == vaList[i].c[0])
+		{
+			return (vaList[i].f);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+/**
+ * _printf - own custom printf function
+ * @format: format string
+ * Return: value of printed chars
+ */
+
 int _printf(const char *format, ...)
 {
-    int printedChar;
-    print_t f_list[] = {
-        {"c" , print_char},
-        {"s" , print_string},
-        {"%" , print_per},
-        {"d" , print_integer},
-        {"i" , print_integer},
-        {"b" , print_binary},
-        {"r" , print_reversed},
-        {"R" , rot13},
-        {"u" , unsigned_int},
-        {"o" , print_octal},
-        {"x" , print_hex},
-        {"X" , print_heX},
-        {NULL,NULL},
-    };
-    va_list vaList; //initialize the argument list
+	va_list ap;
+	int sum = 0, i = 0;
+	int (*func)();
 
-    if(format == NULL)
-        return(-1);
-    
-    va_start(vaList, format);
-    //call the parse function
-    int printedchar = parse(format ,f_list, vaList);
-    //end the argument list
-    va_end(vaList);
-    return(printedChar);
+	if (!format || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+	va_start(ap, format);
+
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			if (format[i + 1] != '\0')
+				func = cov_fun(format[i + 1]);
+			if (func == NULL)
+			{
+				_putchar(format[i]);
+				sum++;
+				i++;
+			}
+			else
+			{
+				sum += func(ap);
+				i += 2;
+				continue;
+			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			sum++;
+			i++;
+		}
+	}
+	va_end(ap);
+	return (sum);
 }
