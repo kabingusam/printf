@@ -1,57 +1,134 @@
 #include "main.h"
+#include <stdarg.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 /**
- * print_reversed - Calls a function to reverse and print a string
- * @arg: Argument passed to the function
- * Return: The amount of characters printed
+ * print_char - print char
+ * @ap: arg list
+ * Return: number of printed char
  */
-int print_reversed(va_list arg)
-{
-	int len;
-	char *str;
-	char *ptr;
 
-	str = va_arg(arg, char *);
-	if (str == NULL)
-		return (-1);
-	ptr = rev_string(str);
-	if (ptr == NULL)
-		return (-1);
-	for (len = 0; ptr[len] != '\0'; len++)
-		_write_char(ptr[len]);
-	free(ptr);
-	return (len);
+int print_char(va_list ap)
+{
+	char c = va_arg(ap, int);
+
+	if (c == '\0')
+	{
+		return (write(1, &c, 1));
+	}
+	_putchar(c);
+	return (1);
 }
 
 /**
- * rot13 - Converts string to rot13
- * @list: string to convert
- * Return: converted string
+ * print_str - print string
+ * @ap: arg list
+ * Return: number of printed char
  */
-int rot13(va_list list)
-{
-	int i;
-	int x;
-	char *str;
-	char s[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char u[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	str = va_arg(list, char *);
-	if (str == NULL)
-		return (-1);
-	for (i = 0; str[i] != '\0'; i++)
+int print_str(va_list ap)
+{
+	char *argument = va_arg(ap, char *);
+	int sum = 0;
+
+	if (!argument)
 	{
-		for (x = 0; x <= 52; x++)
-		{
-			if (str[i] == s[x])
-			{
-				_write_char(u[x]);
-				break;
-			}
-		}
-		if (x == 53)
-			_write_char(str[i]);
+		sum += _puts("(null)", 0);
+		return (sum);
 	}
-	return (i);
+
+	return (_puts(argument, 0));
+}
+
+/**
+ * print_str_unprintable
+ * @ap: arg list
+ * Return: number of printed char
+ */
+
+int print_str_unprintable(va_list ap)
+{
+	char *argument = va_arg(ap, char *);
+	int sum = 0;
+
+	if (!argument)
+	{
+		sum += _puts("(null)", 0);
+		return (sum);
+	}
+
+	return (_puts(argument, 1));
+}
+
+/**
+ * print_str_reverse - reverse a string
+ * @ap: arg list
+ * Return: number  of printed char
+ */
+int print_str_reverse(va_list ap)
+{
+	char *argument = va_arg(ap, char *), *str;
+	int size, left, limit, right, sum = 0;
+
+	if (!argument)
+	{
+		sum += _puts("%r", 0);
+		return (sum);
+	}
+
+	size = _strlen_recursion(argument);
+	right = size - 1;
+	limit = (size % 2 == 0) ? (size + 1) / 2 : (size / 2);
+
+	str = malloc(sizeof(char) * size + 1);
+
+	if (str == NULL)
+	{
+		return (0);
+	}
+
+	if (size % 2 != 0)
+	{
+		str[limit] = argument[limit];
+	}
+
+	for (left = 0; left < limit; left++)
+	{
+		str[left] = argument[right];
+		str[right] = argument[left];
+		right--;
+	}
+
+	str[size] = '\0';
+
+	sum = _puts(str, 0);
+	free(str);
+
+	return (sum);
+}
+
+/**
+ * print_rot13 - print string in rot13
+ * @ap: arg list
+ * Return: number of printed char
+ */
+
+int print_rot13(va_list ap)
+{
+	int sum = 0;
+	char *str, *argument = va_arg(ap, char *);
+
+	if (!argument)
+	{
+		sum += _puts("%R", 0);
+		return (sum);
+	}
+
+	str = convert_rot13(argument);
+	if (!str)
+		return (0);
+	sum = _puts(str, 0);
+	free(str);
+	return (sum);
 }
