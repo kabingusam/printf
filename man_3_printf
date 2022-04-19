@@ -1,0 +1,31 @@
+.TH _printf 1 "18 April 2022" "version 1.0"
+.SH NAME
+.BI _printf 
+- implementing a  custom printf function.
+.SH SYNOPSIS
+- gcc -Wall -Werror -Wextra -pedantic -std=gnu89
+.SH DESCRIPTION
+- This is a custom printf function that prints output to the standard ouput stream.
+.SH OPTIONS
+- The output i printed based on the format specified in the code.
+c : characters are to be printed
+s : Strings are to be printed
+% : format specifier
+d : integers are to be printed
+i : integers are to be printed
+b : binary are to be printed
+r : print in reverse order
+R : print in rot13
+u : unsigned integers to be printed
+o : octal be printed
+x : hexadecimal in lowercase be printed
+X : hexadecimal in uppercase to be printed
+
+.SH BUGS
+- No BUGS encountered.
+
+.SH AUTHOR
+Kabingu Sammy.
+
+.SH SEE ALSO
+
