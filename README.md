@@ -17,7 +17,7 @@ Authorized functions and macros:
 
 - Compile code using flags: `-Wall`, `-Werror`, `-Wextra`, `-pedantic`, `-Wno-format`
 
-##Team:
+Team:
 
 *kabingu Sammy* - [Github](https://github.com/kabingusam).
 
