@@ -33,7 +33,23 @@ Authorized functions and macros:
 6. ..*``va_copy (man 3 va_copy)``
 7. ..*``va_arg (man 3 va_arg``
 
+Files contained:
 
+1. _printf.c
+
+2. conversion.c
+
+3. digits.c
+
+4. numbers.c
+
+5. percent.c
+
+6. printout.c
+
+7. string.c
+
+8. string1.c
 
 Team:
 
