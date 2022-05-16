@@ -19,7 +19,7 @@ Useful links:
 
 Compailation:
 
- $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
+      $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
 
 
 Authorized functions and macros:
