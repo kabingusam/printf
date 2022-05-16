@@ -5,7 +5,7 @@
 <br>
 
 
-<h1><p align="center">Very own printf function.</h1></p></font>
+<h1><p align="center">Custom printf function.</h1></p></font>
 
 
 
