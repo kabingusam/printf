@@ -51,6 +51,9 @@ Files contained:
 
 8. string1.c
 
+9. man_3_printf
+
 Team:
+
 
 *kabingu Sammy* - [Github](https://github.com/kabingusam) || [twitter](https://twitter.com/Kabingusammy)
