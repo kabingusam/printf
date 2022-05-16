@@ -19,7 +19,7 @@ Useful links:
 
 Compailation:
 
-Use flags: `-Wall`, `-Werror`, `-Wextra`, `-pedantic`, `-Wno-format`
+ $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
 
 
 Authorized functions and macros:
