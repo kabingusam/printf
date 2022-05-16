@@ -1,6 +1,6 @@
 <p align="center">
 
-  <img src="full_colored_light.jpg" width="400\"/>
+  <img src="images.jpg" width="400\"/>
 
 <br>
 
