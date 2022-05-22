@@ -12,9 +12,9 @@
 
 Useful links:
 
--http://www.firmcodes.com
+http://www.firmcodes.com
 
--https://www.geeksforgeeks.org/write-a-c-program-to-print.
+https://www.geeksforgeeks.org/write-a-c-program-to-print.
 
 
 Compailation:
